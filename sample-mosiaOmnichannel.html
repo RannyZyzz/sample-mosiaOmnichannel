@@ -5,16 +5,75 @@
     <title>Exemplo de recebimento de parâmetro GET</title>
   </head>
   <body>
-    <h1>Valor do parâmetro GET "chavepasse"</h1>
+    <h1>Request API MosiaOmnichannel - chavePasse</h1>
     <div id="resultado"></div>
+  </head>
+    <body>
+      <button onclick="copiarParametros()">Clipboard chavePasse</button>
+    </body>
+    <div>
+        <input type="text" id="instanciaAppInput" placeholder="InstanciaApp">
+        <input type="text" id="chavePasseInput" placeholder="ChavePasse">
+        <input type="text" id="chaveFuncionalidadeInput" placeholder="ChaveFuncionalidade">
+        <input type="text" id="Authorization" placeholder="Authorization">
+        <button onclick="realizarRequest()">Fazer Request</button>
+    </div>
+    <div>
+        <div id="retornoApi"></div>
+    </div>
+
     <script>
-      // Extrai o valor do parâmetro "chavepasse" da URL
-      const urlParams = new URLSearchParams(window.location.search);
-      const chavePasse = urlParams.get('chavePasse');
+        function copiarParametros() {
+          // Obter a URL atual
+          var url = window.location.search;
+          
+          // Extrair os parâmetros da URL
+          var urlParams = new URLSearchParams(url);
+          
+          // Obter o valor do parâmetro chavePasse
+          var chavePasse = urlParams.get('chavePasse');
+          
+          // Copiar para a área de transferência
+          navigator.clipboard.writeText(chavePasse)
+            .then(function() {
+              console.log('Parâmetros copiados com sucesso!');
+            })
+            .catch(function(error) {
+              console.error('Erro ao copiar parâmetros:', error);
+            });
+        }
+      </script>
+
+    <script>
+      function realizarRequest() {
+      const instanciaApp = document.getElementById('instanciaAppInput').value;
+      const chavePasse = document.getElementById('chavePasseInput').value;
+      const chaveFuncionalidade = document.getElementById('chaveFuncionalidadeInput').value;
+      const Authorization = document.getElementById('Authorization').value;
+
+      const config = {
+          headers: {
+            'Authorization': `${Authorization}`
+          }
+        };
+
+      const url = `https://api.mosiaomnichannel.com.br/clientes/chavePasse/usuario?instanciaApp=${instanciaApp}&chavePasse=${chavePasse}&chaveFuncionalidade=${chaveFuncionalidade}`;
       
-      // Exibe o valor na tela
-      const resultadoDiv = document.getElementById('resultado');
-      resultadoDiv.innerHTML = chavePasse;
+
+      fetch(url,config)
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          const jsonFormatted = JSON.stringify(data, null, 2);
+          var resultadoDiv = document.getElementById('retornoApi');
+            resultadoDiv.innerHTML = '<pre>' + jsonFormatted + '</pre>';
+        //   var resultadoDiv = document.getElementById('retornoApi');
+        //     resultadoDiv.innerHTML = JSON.stringify(data,null,2);
+        })
+        .catch(error => {
+          console.error('Ocorreu um erro:', error);
+        });
+    }
     </script>
   </body>
 </html>
