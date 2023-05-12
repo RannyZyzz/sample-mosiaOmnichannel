@@ -6,10 +6,18 @@
   </head>
   <body>
     <h1>Request API MosiaOmnichannel - chavePasse</h1>
+    chavePasse recebida
     <div id="resultado"></div>
   </head>
     <body>
       <button onclick="copiarParametros()">Clipboard chavePasse</button>
+      <div>
+        <select id="urlSelecionada">
+          <option value="url1">Usuario Logado</option>
+          <option value="url2">Grupo Familiar</option>
+          <option value="url3">Informações do Sistema</option>
+        </select>
+      </div>
     </body>
     <div>
         <input type="text" id="instanciaAppInput" placeholder="InstanciaApp">
@@ -19,8 +27,19 @@
         <button onclick="realizarRequest()">Fazer Request</button>
     </div>
     <div>
-        <div id="retornoApi"></div>
+        <div id="retornoApi">
+        </div>
     </div>
+
+    <script>
+      // Extrai o valor do parâmetro "chavepasse" da URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const chavePasse = urlParams.get('chavePasse');
+      
+      // Exibe o valor na tela
+      const resultadoDiv = document.getElementById('resultado');
+      resultadoDiv.innerHTML = chavePasse;
+    </script>
 
     <script>
         function copiarParametros() {
@@ -50,14 +69,26 @@
       const chavePasse = document.getElementById('chavePasseInput').value;
       const chaveFuncionalidade = document.getElementById('chaveFuncionalidadeInput').value;
       const Authorization = document.getElementById('Authorization').value;
+      const urlSelecionada = document.getElementById('urlSelecionada').value;
 
       const config = {
           headers: {
             'Authorization': `${Authorization}`
           }
         };
+      
+      
+      let url
 
-      const url = `https://api.mosiaomnichannel.com.br/clientes/chavePasse/usuario?instanciaApp=${instanciaApp}&chavePasse=${chavePasse}&chaveFuncionalidade=${chaveFuncionalidade}`;
+        if (urlSelecionada === 'url1') {
+          url = `https://api.mosiaomnichannel.com.br/clientes/chavePasse/usuario?instanciaApp=${instanciaApp}&chavePasse=${chavePasse}&chaveFuncionalidade=${chaveFuncionalidade}`;
+        } else if (urlSelecionada === 'url2') {
+          url = `https://api.mosiaomnichannel.com.br/clientes/chavePasse/grupoFamiliar?instanciaApp=${instanciaApp}&chavePasse=${chavePasse}&chaveFuncionalidade=${chaveFuncionalidade}`;
+        } else if (urlSelecionada === 'url3') {
+          url = `https://api.mosiaomnichannel.com.br/clientes/chavePasse/sistema?instanciaApp=${instanciaApp}&chavePasse=${chavePasse}&chaveFuncionalidade=${chaveFuncionalidade}`;
+        }
+      
+        //  const url = `https://api.mosiaomnichannel.com.br/clientes/chavePasse/usuario?instanciaApp=${instanciaApp}&chavePasse=${chavePasse}&chaveFuncionalidade=${chaveFuncionalidade}`;
       
 
       fetch(url,config)
@@ -67,8 +98,6 @@
           const jsonFormatted = JSON.stringify(data, null, 2);
           var resultadoDiv = document.getElementById('retornoApi');
             resultadoDiv.innerHTML = '<pre>' + jsonFormatted + '</pre>';
-        //   var resultadoDiv = document.getElementById('retornoApi');
-        //     resultadoDiv.innerHTML = JSON.stringify(data,null,2);
         })
         .catch(error => {
           console.error('Ocorreu um erro:', error);
