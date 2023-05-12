@@ -6,8 +6,11 @@
   </head>
   <body>
     <h1>Request API MosiaOmnichannel - chavePasse</h1>
-    chavePasse recebida
-    <div id="resultado"></div>
+    <div>
+      chavePasse recebida
+      <div id="resultado"></div>
+    </div>
+    
   </head>
     <body>
       <button onclick="copiarParametros()">Clipboard chavePasse</button>
@@ -20,7 +23,11 @@
       </div>
     </body>
     <div>
-        <input type="text" id="instanciaAppInput" placeholder="InstanciaApp">
+      <select id="instanciaAppInput">
+        <option value="url1">produção</option>
+        <option value="url2">sandbox</option>
+      </select>
+        <!-- <input type="text" id="instanciaAppInput" placeholder="InstanciaApp"> -->
         <input type="text" id="chavePasseInput" placeholder="ChavePasse">
         <input type="text" id="chaveFuncionalidadeInput" placeholder="ChaveFuncionalidade">
         <input type="text" id="Authorization" placeholder="Authorization">
