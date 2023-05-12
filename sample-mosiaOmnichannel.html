@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Exemplo de recebimento de parâmetro GET</title>
+  </head>
+  <body>
+    <h1>Valor do parâmetro GET "chavepasse"</h1>
+    <div id="resultado"></div>
+    <script>
+      // Extrai o valor do parâmetro "chavepasse" da URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const chavePasse = urlParams.get('chavePasse');
+      
+      // Exibe o valor na tela
+      const resultadoDiv = document.getElementById('resultado');
+      resultadoDiv.innerHTML = chavePasse;
+    </script>
+  </body>
+</html>
