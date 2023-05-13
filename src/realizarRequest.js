@@ -27,11 +27,16 @@ function realizarRequest() {
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        const jsonFormatted = JSON.stringify(data, null, 2);
-        var resultadoDiv = document.getElementById('retornoApi');
-          resultadoDiv.innerHTML = '<pre>' + jsonFormatted + '</pre>';
+        formatJSON(data);
       })
       .catch(error => {
         console.error('Ocorreu um erro:', error);
       });
-  }
+}
+
+
+function formatJSON(json) {
+  var formattedJSON = JSON.stringify(json, null, 2);
+  var highlightedJSON = hljs.highlight('json', formattedJSON).value;
+  document.getElementById('retornoApi').innerHTML = highlightedJSON;
+}
