@@ -109,4 +109,78 @@
 
       <div class="form-group">
         <div id="retornoApi"></div>
-      </div
+      </div>
+      <script>
+      // Extrai o valor do parâmetro "chavepasse" da URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const chavePasse = urlParams.get('chavePasse');
+
+      // Exibe o valor na tela
+      const resultadoDiv = document.getElementById('resultado');
+      resultadoDiv.innerHTML = chavePasse;
+    </script>
+
+    <script>
+        function copiarParametros() {
+          // Obter a URL atual
+          var url = window.location.search;
+
+          // Extrair os parâmetros da URL
+          var urlParams = new URLSearchParams(url);
+
+          // Obter o valor do parâmetro chavePasse
+          var chavePasse = urlParams.get('chavePasse');
+
+          // Copiar para a área de transferência
+          navigator.clipboard.writeText(chavePasse)
+            .then(function() {
+              console.log('Parâmetros copiados com sucesso!');
+            })
+            .catch(function(error) {
+              console.error('Erro ao copiar parâmetros:', error);
+            });
+        }
+      </script>
+
+    <script>
+      function realizarRequest() {
+      const instanciaApp = document.getElementById('instanciaAppInput').value;
+      const chavePasse = document.getElementById('chavePasseInput').value;
+      const chaveFuncionalidade = document.getElementById('chaveFuncionalidadeInput').value;
+      const Authorization = document.getElementById('Authorization').value;
+      const urlSelecionada = document.getElementById('urlSelecionada').value;
+
+      const config = {
+          headers: {
+            'Authorization': `${Authorization}`
+          }
+        };
+
+
+      let url
+
+        if (urlSelecionada === 'url1') {
+          url = `https://api.mosiaomnichannel.com.br/clientes/chavePasse/usuario?instanciaApp=${instanciaApp}&chavePasse=${chavePasse}&chaveFuncionalidade=${chaveFuncionalidade}`;
+        } else if (urlSelecionada === 'url2') {
+          url = `https://api.mosiaomnichannel.com.br/clientes/chavePasse/grupoFamiliar?instanciaApp=${instanciaApp}&chavePasse=${chavePasse}&chaveFuncionalidade=${chaveFuncionalidade}`;
+        } else if (urlSelecionada === 'url3') {
+          url = `https://api.mosiaomnichannel.com.br/clientes/chavePasse/sistema?instanciaApp=${instanciaApp}&chavePasse=${chavePasse}&chaveFuncionalidade=${chaveFuncionalidade}`;
+        }
+
+        //  const url = `https://api.mosiaomnichannel.com.br/clientes/chavePasse/usuario?instanciaApp=${instanciaApp}&chavePasse=${chavePasse}&chaveFuncionalidade=${chaveFuncionalidade}`;
+
+
+      fetch(url,config)
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          const jsonFormatted = JSON.stringify(data, null, 2);
+          var resultadoDiv = document.getElementById('retornoApi');
+            resultadoDiv.innerHTML = '<pre>' + jsonFormatted + '</pre>';
+        })
+        .catch(error => {
+          console.error('Ocorreu um erro:', error);
+        });
+    }
+    </script>
+  <body/>
