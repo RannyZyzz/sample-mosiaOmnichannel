@@ -108,7 +108,6 @@
       </div>
 
       <div class="form-group">
-        <label>Response</label>
         <div id="retornoApi"></div>
       </div>
       <script>
@@ -146,6 +145,7 @@
     <script>
       function realizarRequest() {
       const instanciaApp = document.getElementById('instanciaAppInput').value;
+      console.log(instanciaApp);
       const chavePasse = document.getElementById('chavePasseInput').value;
       const chaveFuncionalidade = document.getElementById('chaveFuncionalidadeInput').value;
       const Authorization = document.getElementById('Authorization').value;
