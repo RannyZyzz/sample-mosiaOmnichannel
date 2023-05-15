@@ -24,14 +24,14 @@ Para realizar o request a partir da url acima os parametros são adquiridos no p
 |Chave Passe|`Introdução à Chave Passe`            |[Link - 1](https://mobilesaudejira.atlassian.net/wiki/spaces/MO/pages/2460057604/Introdu+o+Chave+Passe)            |
 |Chave Funcionalidade|`Cadastro da Funcionalidade Customizada WebView`            |[Link - 2](https://mobilesaudejira.atlassian.net/wiki/spaces/MO/pages/2465595490/Cadastro+da+Funcionalidade+Customizada+WebView)            |
 |Authorization|`Api clientes - Autenticação`|[Link - 3](https://mobilesaudejira.atlassian.net/wiki/spaces/MO/pages/2533195788/Api+clientes+-+Autentica+o)
-|
 
-# Fluxo 
+
+# UML diagrams
 
 ```mermaid
-graph LR
-A[Webview] -- solicitação --> B((Request))
-A --> C(Round Rect)
-B --> D{chavePasse}
-C --> D
+sequenceDiagram
+Webview -->> Api Operadora: Envio de chavePasse
+Api Operadora ->> Webview: Solicita dados da chavePasse recebida
+Webview ->> Api Operadora: Envio das informações solicitadas
+Api Operadora -->> Acesso Identificado: Identifica e valida usuário
 ```
