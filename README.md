@@ -30,8 +30,8 @@ Para realizar o request a partir da url acima os parametros são adquiridos no p
 
 ```mermaid
 sequenceDiagram
-Webview -->> Api Operadora: Envio de chavePasse
-Api Operadora ->> Webview: Solicita dados da chavePasse recebida
-Webview ->> Api Operadora: Envio das informações solicitadas
-Api Operadora -->> Acesso Identificado: Identifica e valida usuário
+Omnichannel -->> Webview Operadora: Envio de chavePasse
+Webview Operadora ->> Omnichannel: Solicita dados da chavePasse recebida
+Omnichannel ->> Webview Operadora: Envio de informações
+Webview Operadora -->> Acesso Identificado: Identifica e valida usuário
 ```
