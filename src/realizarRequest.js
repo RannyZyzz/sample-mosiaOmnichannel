@@ -20,6 +20,8 @@ function realizarRequest() {
         url = `https://api.mosiaomnichannel.com.br/clientes/chavePasse/grupoFamiliar?instanciaApp=${instanciaApp}&chavePasse=${chavePasse}&chaveFuncionalidade=${chaveFuncionalidade}`;
       } else if (urlSelecionada === 'url3') {
         url = `https://api.mosiaomnichannel.com.br/clientes/chavePasse/sistema?instanciaApp=${instanciaApp}&chavePasse=${chavePasse}&chaveFuncionalidade=${chaveFuncionalidade}`;
+      } else if (urlSelecionada === 'url4') {
+        url = `https://api.mosiaomnichannel.com.br/clientes/chavePasse/chavePasse?instanciaApp=${instanciaApp}&chavePasse=${chavePasse}&chaveFuncionalidade=${chaveFuncionalidade}`;
       }
 
 
